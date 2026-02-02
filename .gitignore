@@ -1,0 +1,59 @@
+# Archivos de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+theme/
+
+# Archivos de entorno virtual
+venv/
+env/
+ENV/
+*.env
+
+# Archivos de configuración local
+*.sqlite3
+db.sqlite3
+*.log
+
+# Archivos de migraciones (opcional, si no quieres versionarlas)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+
+# Archivos de compilación
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Archivos de Django
+staticfiles/
+media/
+*.mo
+*.pot
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de cobertura y pruebas
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Archivos de Docker
+*.pid
+*.seed
+*.bak
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,24 @@
+body {
+    font-family: "Domine", serif;
+    background-image: url("../img/background-flute.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #f0f2f5; /* Color de respaldo */
+    position: relative; /* Necesario para el pseudo-elemento */
+    z-index: 0; /* Asegura que el contenido esté por encima */
+}
+
+/* Pseudo-elemento para aplicar una capa traslúcida sobre la imagen de fondo */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*background-color: rgba(255, 255, 255, 0.7);  Blanco con 70% de opacidad. Ajusta el valor alpha (0.0 a 1.0) para más/menos traslucidez */
+    background: linear-gradient(to top, rgba(255, 102, 0, 0.7), rgba(236, 95, 158, 0.7));
+    z-index: -1; /* Coloca esta capa detrás del contenido */
+}

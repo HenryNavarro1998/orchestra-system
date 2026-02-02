@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Caicara del Orinoco",
+    "type": "center",
+    "code": "BO06009",
+    "municipality": "Cedeño",
+    "parish": "Cedeño",
+    "director_name": "Constantino Hernández",
+    "address": "Casa De La Cultura Amalivaca, Av. Libertador, Municipio Cedeño"
+  }, {
+    "name": "Canaima",
+    "type": "center",
+    "code": "BO06012",
+    "municipality": "Gran Sabana",
+    "parish": "Gran Sabana",
+    "director_name": "Juan Manrique",
+    "address": "Parque Nacional Canaima, Sector II Kamarta-Kanaimá– Calle Awaparari, Sector Awaparari, Dentro Del Campamento Canaima"
+  }, {
+    "name": "Ciudad Bolívar",
+    "type": "center",
+    "code": "BO06001",
+    "municipality": "Heres",
+    "parish": "Vista Hermosa",
+    "director_name": "Dino Pronio",
+    "address": "Centro Cultural Bolívar, Planta Baja, Vista Hermosa Ii, Entre Calle Central Y Manzana 16, Específicamente En El Antiguo Cine Roxy Y Cada."
+  }, {
+    "name": "Ciudad Guayana",
+    "type": "center",
+    "code": "BO06002",
+    "municipality": "Caroní",
+    "parish": "Universidad",
+    "director_name": "Gregman Rodríguez",
+    "address": "Centro Empresarial Alta Vista, Edificio Cvg, Antiguo Maxy`S, Planta Baja, Guayana, Alta Vista Sur Puerto Ordaz, Ciudad Guayana"
+  }, {
+    "name": "El Palmar",
+    "type": "center",
+    "code": "BO06008",
+    "municipality": "Padre Pedro Chien",
+    "parish": "Padre Pedro Chien",
+    "director_name": "Salvador Velásquez",
+    "address": "Calle Miranda Cruce Con Calle San Miguel, Sector La Plaza, El Palmar, Frente A La Plaza Bolívar, Dentro De Alcaldía Edo. Bolívar."
+  }, {
+    "name": "Entidad De Atención Ciudad Bolívar (H)",
+    "type": "module",
+    "code": "BO06014",
+    "municipality": "Heres",
+    "parish": "Marhuanta",
+    "director_name": "Daniela Padrón",
+    "address": "Av Paseo Libertador Simón Bolívar. Frente a la 5ta División Ciudad Bolívar."
+  }, {
+    "name": "Entidad De Atención Ciudad Bolívar (V)",
+    "type": "module",
+    "code": "BO06015",
+    "municipality": "Heres",
+    "parish": "Catedral",
+    "director_name": "Bruno Lopez",
+    "address": "Urbanizacion Medina Angarita."
+  }, {
+    "name": "Entidad De Atención Monseñor Juan José Bernal San Félix",
+    "type": "module",
+    "code": "BO06016",
+    "municipality": "Caroní",
+    "parish": "Dalla Costa",
+    "director_name": "José Hernández",
+    "address": "Av. Angostura, Sector Guaiparo, San Félix."
+  }, {
+    "name": "Gran Sabana",
+    "type": "center",
+    "code": "BO06007",
+    "municipality": "Gran Sabana",
+    "parish": "Gran Sabana",
+    "director_name": "Basilio Benavides",
+    "address": "Sede De La Fundación Del Niño, Frente A La Alcaldía De Gran Sabana Casco Central."
+  }, {
+    "name": "Guasipati",
+    "type": "center",
+    "code": "BO06004",
+    "municipality": "Roscio",
+    "parish": "Roscio",
+    "director_name": "Eduardo Ravago",
+    "address": "Sector Aeropuerto, Calle Maturín, Casa De La Cultura."
+  }, {
+    "name": "Pozo Verde",
+    "type": "center",
+    "code": "BO06011",
+    "municipality": "Caroní",
+    "parish": "Pozo Verde",
+    "director_name": "Adrian Rivero",
+    "address": "Vía El Pao, Km 29, Sector El Dique."
+  }, {
+    "name": "Unare",
+    "type": "center",
+    "code": "BO06006",
+    "municipality": "Caroní",
+    "parish": "Unare",
+    "director_name": "Raiza Medrano",
+    "address": "Unare II, Sector 1, Calle 7 Con 3 Colegio Fe Y Alegría Virgen Niña."
+  }, {
+    "name": "Upata",
+    "type": "academic_center",
+    "code": "BO06005",
+    "municipality": "Piar",
+    "parish": "Sector Capital",
+    "director_name": "Noel Linero",
+    "address": "Calle Bolívar Con Calle Ayacucho Edif. El Principe. Diagonal A La Plaza Bolívar, Casco Central."
+  }, {
+    "name": "Vista al Sol (San Félix)",
+    "type": "center",
+    "code": "BO06003",
+    "municipality": "Caroní",
+    "parish": "Vista al Sol",
+    "director_name": "Santos Morales",
+    "address": "Ruta 1, Centro Comercial Vista Al Sol San Feliz, Antiguo Centro Comercial Económica, Piso 1, Local 1, Frente Al Mercado Nueva Chirica, San Félix."
+  }, {
+    "name": "Gerencia Estado Bolívar",
+    "type": "management",
+    "code": "0000005",
+    "municipality": "Ninguna",
+    "parish": "Ninguna",
+    "director_name": "Ninguna",
+    "address": "Ninguna"
+  }
+]

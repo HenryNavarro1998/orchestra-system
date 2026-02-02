@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Violin",
+    "category": "String"
+  },
+  {
+    "name": "Viola",
+    "category": "String"
+  },
+  {
+    "name": "Violoncello",
+    "category": "String"
+  },
+  {
+    "name": "Contrabajo",
+    "category": "String"
+  },
+  {
+    "name": "Mandolina",
+    "category": "String"
+  },
+  {
+    "name": "Bandola",
+    "category": "String"
+  },
+  {
+    "name": "Bajo Electrico",
+    "category": "String"
+  },
+  {
+    "name": "Cuatro Venezolano",
+    "category": "String"
+  },
+  {
+    "name": "Guitarra",
+    "category": "String"
+  },
+  {
+    "name": "Arpa",
+    "category": "Other"
+  },
+  {
+    "name": "Percusion",
+    "category": "Percussion"
+  },
+  {
+    "name": "Piano",
+    "category": "Percussion"
+  },
+  {
+    "name": "Flauta traversa",
+    "category": "Wind"
+  },
+  {
+    "name": "Oboe",
+    "category": "Wind"
+  },
+  {
+    "name": "Clarinete",
+    "category": "Wind"
+  },
+  {
+    "name": "Fagot",
+    "category": "Wind"
+  },
+  {
+    "name": "Trompeta",
+    "category": "Wind"
+  },
+  {
+    "name": "Corno",
+    "category": "Wind"
+  },
+  {
+    "name": "Tuba",
+    "category": "Wind"
+  },
+  {
+    "name": "Trombon",
+    "category": "Wind"
+  },
+  {
+    "name": "Bombardino",
+    "category": "Wind"
+  },
+  {
+    "name": "Coro",
+    "category": "Other"
+  },  
+  {
+    "name": "Retiro Formal",
+    "category": "Other"
+  },
+  {
+    "name": "Flauta Dulce",
+    "category": "Wind"
+  }
+]

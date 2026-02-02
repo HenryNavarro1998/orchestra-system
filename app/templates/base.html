@@ -1,0 +1,143 @@
+{% load tailwind_tags %}
+{% load static %} 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}El Sistema - Ciudad Guayana{% endblock %}</title>
+    {% tailwind_css %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+   
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="flex min-h-screen">
+    {# Sidebar lateral izquierdo #}
+    <aside class="w-64 bg-white/70 shadow-lg p-6 flex flex-col justify-between sticky top-0 h-screen">
+        <div>
+            <div class="flex items-center mb-10">
+                <img src="{% static 'img/Logo El Sistema.png' %}" alt="El Sistema Logo" class="h-12 mr-3"> 
+            </div>
+            <nav>
+                <ul>
+                    <li class="mb-4">
+                        <a href="{% url 'app:home' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200">
+                            <i class="fas fa-user-plus mr-3"></i> {# Icono de Font Awesome #}
+                            Home
+                        </a>
+                    </li>
+                   <li class="mb-4">
+                        {% comment %} <a href="{% url 'students:new' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-file-medical mr-3"></i>
+                            Nueva inscripción
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                    <li class="mb-4">
+                        {% comment %} <a href="{% url 'students:list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-users mr-3"></i>
+                            Estudiantes - Global
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                    <li class="mb-4">
+                        {% comment %} <a href="{% url 'academic_core:instruments_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-project-diagram mr-3"></i>
+                            Cátedras
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                    <li class="mb-4">
+                        {% comment %} <a href="{% url 'academic_core:project_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-guitar mr-3"></i>
+                            Niveles
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                    <li class="mb-4">
+                        {% comment %} <a href="{% url 'academic_core:programs_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-guitar mr-3"></i>
+                            Programas Musicales
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                    <li class="mb-4">
+                        {% comment %} <a href="{% url 'academic_core:center_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-project-diagram mr-3"></i>
+                            Núcleos
+                        {% comment %} </a> {% endcomment %}
+                    </li>
+                     <li class="mb-4">
+                        {% comment %} <a href="{% url 'employees:list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                            <i class="fas fa-users mr-3"></i>
+                            Trabajadores
+                        </a>
+                    {% comment %} </li> {% endcomment %}
+                </ul>
+            </nav>
+        </div>
+
+        {# Parte inferior del sidebar, si es necesario #}
+        <div>
+            {# Puedes añadir aquí un pie de página o enlaces adicionales del sidebar #}
+        </div>
+    </aside>
+
+    <main class="flex-1 p-10 bg-transparent">
+        {# Nuevo contenedor para limitar el ancho y centrar el contenido #}
+        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8"> 
+            <header class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold text-gray-800">{% block current_page %}X{% endblock %}</h1>
+                <a href="{% url 'app:logout' %}" class="bg-pink-900 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-200">
+                    CERRAR SESIÓN
+                </a>
+            </header>
+
+            {% block content %}
+            {# Este bloque será el contenido específico de cada página #}
+            {% endblock %}
+
+            <!-- Contenedor para los mensajes tipo Toast -->
+            <div id="toast-container" class="fixed top-10 left-1/2 -translate-x-1/2 z-50">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="toast-message p-4 rounded-lg shadow-lg flex items-center space-x-3 mb-4 transition-transform duration-300 ease-in-out transform scale-100 opacity-100
+                        {% if message.tags == 'success' %} bg-green-500 text-white
+                        {% elif message.tags == 'error' %} bg-red-600 text-white
+                        {% else %} bg-gray-700 text-white {% endif %}" role="alert">
+                            <div class="icon">
+                                {% if message.tags == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif message.tags == 'error' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% else %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% endif %}
+                            </div>
+                            <span>{{ message }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.toast-message');
+            toasts.forEach(toast => {
+                setTimeout(() => {
+                    toast.classList.remove('scale-100', 'opacity-100');
+                    toast.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300); // El mismo tiempo que la duración de la transición CSS
+                }, 5000); // 5 segundos antes de empezar a desaparecer
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

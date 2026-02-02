@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="login-wrapper"> 
+
+            <div class="logo-superior"> <!-- Se requiere cambiar los logos, tanto este como el del sistema-->
+                <img src="{% static 'img/Logo El Sistema Guayana.png' %}" alt="Logo Principal">
+            </div>
+        
+            <div class="login-card">
+                <div class="header">                
+                    <img src="{% static 'img/Logo El Sistema.png' %}" alt="Logo El Sistema">
+                </div>
+
+                <div class="title">INICIO DE SESIÓN</div>
+                
+                <form action="{% url 'app:login' %}" method="post" class="login-form">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+
+                    <button type="submit" class="login-button" >Iniciar Sesión</button>
+                    {% if form.errors %}
+                        <p class="error">Credenciales inválidas</p>
+                    {% endif %}
+                </form>
+            </div>
+
+        </div> <!-- wrapper ends -->
+    </div>
+</body>
+</html>
