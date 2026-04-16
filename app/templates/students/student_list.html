@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Global - Estudiantes{% endblock %}
+{% block current_page %}Global - Estudiantes{% endblock %}
+
+{% block content %}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white/60 p-6 rounded-lg shadow-md flex items-center">
+            <i class="fas fa-users text-pink-600 text-3xl mr-4"></i>
+            <div>
+                <h3 class="text-gray-500 text-sm font-medium">TOTAL INSCRITOS - GLOBAL</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ all_students }} <span class="text-gray-500 text-sm ml-2"> ESTUDIANTES </span></p>
+                <p class="text-gray-500 text-xs"> Período {{ current_academic_period }}</p>
+            </div>
+        </div>
+
+        <div class="bg-white/60 p-6 rounded-lg shadow-md flex items-center">
+            <i class="fas fa-user-astronaut text-pink-600 text-3xl mr-4"></i>
+            <div>
+                <h3 class="text-gray-500 text-sm font-medium">TOTAL DE CÁTEDRAS ACTIVAS</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ all_instruments }}  <span class="text-gray-500 text-sm ml-2">CÁTEDRAS</span></p>
+                <p class="text-gray-500 text-xs">Período {{ current_academic_period }} </p>
+            </div>
+        </div>
+
+        
+        <div class="bg-white/60 p-6 rounded-lg shadow-md flex items-center">
+            <i class="fas fa-id-badge text-pink-600 text-3xl mr-4"></i>
+            <div>
+                <h3 class="text-gray-500 text-sm font-medium">TOTAL DE PROYECTOS ACTIVOS</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ all_projects }}  <span class="text-gray-500 text-sm ml-2">PROYECTOS</span></p>
+                <p class="text-gray-500 text-xs">Período {{ current_academic_period }} </p>
+            </div>
+        </div>
+    </div>    
+
+    <div class="flex justify-end mb-4">
+        <button id="openModalBtn" class="bg-pink-900 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded-lg shadow flex items-center space-x-2">
+            <i class="fas fa-file-import"></i>
+            <span>Importar data estudiantil</span>
+        </button>
+    </div>
+
+    <!-- Modal para subir Excel -->
+    <div id="importModal" class="fixed inset-0 bg-gray-400/50 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+
+            <div class="mt-3 text-center">
+                <button id="closeModalBtn" class="close-modal-btn absolute top-0 right-0 mt-2 mr-2 text-gray-400 hover:text-gray-600 text-2xl font-semibold leading-none focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Instrucciones para importar data</h3>
+                
+                <!-- Instrucciones -->
+                <div class="mt-2 px-7 py-3">
+                    <ul class="text-sm text-gray-500 list-disc text-left space-y-2 ml-4">
+                        <li>Descargue la plantilla en el botón "Descargar plantilla".</li>
+                        <li>Guarde el archivo de excel en su dispositivo.</li>
+                        <li>Edite el documento completando la información solicitada con la data estudiantil del núcleo.</li>
+                        <li>Guarde los cambios en excel. </li>
+                        <li>Haga click en el botón "Cargar excel" y suba el documento que editó, el cual contiene la data estudiantil.</li>
+                    </ul>
+                </div>
+                
+                <div class="mt-4 flex justify-center space-x-4">
+                    <!-- Botón "Descargar plantilla" con el enlace a la nueva vista -->
+                    <a href="{% url 'app:download_student_template' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg shadow flex items-center space-x-2" target="_blank">
+                        <i class="fas fa-download"></i>
+                        <span>Descargar plantilla</span>
+                    </a>
+                    <!-- Botón "Cargar Excel" que activa el campo de archivo oculto -->
+                    <label for="id_file_input" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow flex items-center space-x-2 cursor-pointer">
+                        <i class="fas fa-upload"></i>
+                        <span>Cargar Excel</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver errores de la importación de excel -->
+     {% if import_errors or import_advices %}
+    <div id="importErrorsModal" class="fixed inset-0 bg-gray-400/50 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border max-w-2xl max-h-[80vh] overflow-y-auto shadow-lg rounded-md bg-white">
+
+            <div class="mt-3 text-center">
+                <button id="closeModalErrorBtn" class="close-modal-btn absolute top-0 right-0 mt-2 mr-2 text-gray-400 hover:text-gray-600 text-2xl font-semibold leading-none focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Errores y advertencias en la importación</h3>
+                
+                <!-- Mensajes y errores de la importación -->
+                <div class="mt-2 px-7 py-3">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50/60"> 
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Fila</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Mensaje</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white/60 divide-y divide-gray-200"> 
+                            {% for row, message in import_errors.items %}
+                                <tr class="text-red-700">
+                                    <td class="px-6 py-4 text-sm font-medium">{{ row }}</td>
+                                    <td class="px-6 py-4 text-sm font-medium">{{ message }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for row, message in import_advices.items %}
+                                <tr class="text-amber-700">
+                                    <td class="px-6 py-4 text-sm font-medium">{{ row }}</td>
+                                    <td class="px-6 py-4 text-sm font-medium">{{ message }}</td>
+                                </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Formulario oculto para la subida de archivos -->
+    <form id="upload-form" method="post" enctype="multipart/form-data" action="{% url 'app:upload_student_xlsx' %}" class="hidden">
+        {% csrf_token %}
+        <input type="file" id="id_file_input" name="file" accept=".xlsx">
+    </form>
+
+
+    <h1>Listado de Estudiantes</h1>
+
+    {# Tabla de Estudiantes #}
+    {# Clases modificadas: bg-white/60 para la tabla #}
+    <div class="bg-white/60 p-6 rounded-lg shadow-md overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50/60"> {# También puedes hacer el thead semitransparente #}
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cédula</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apellido</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Nacimiento</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cátedra</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Proyecto</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Núcleo</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Opciones</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white/60 divide-y divide-gray-200"> {# Y el tbody un poco menos opaco #}
+                {% for s in students %}
+                    <tr>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{s.document_id}}</td>
+                        <td class="px-6 py-4 text-sm  text-gray-900">{{s.names}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{s.lastnames}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{s.born_date}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{s.instrument}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{s.orchestral_project}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{s.musical_center}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 flex space-x-4">
+                            <a href="{% url 'app:student_detail' s.id %}" class="text-blue-600 hover:text-blue-800" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="flex justify-center mt-4">
+            <a href="#" class="text-gray-500 hover:text-pink-600 text-3xl">
+                <i class="fa-regular fa-circle-up"></i>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalImport = document.getElementById('importModal');
+            const openBtn = document.getElementById('openModalBtn');
+            const closeButtons = document.querySelectorAll('.close-modal-btn');
+            const fileInput = document.getElementById('id_file_input');
+            const uploadForm = document.getElementById('upload-form');
+
+            openBtn.addEventListener('click', () => {
+                modalImport.classList.remove('hidden');
+            });
+
+            // Itera sobre cada botón y le agrega un event listener
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('[id$="Modal"]'); // Encuentra el modal padre más cercano
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                }); 
+            });                
+
+            // Opcional: Cierra el modal al hacer clic fuera de él
+            window.addEventListener('click', (event) => {
+                if (event.target.id.endsWith('Modal')) {
+                    event.target.classList.add('hidden');
+                }
+            });
+
+            // Escucha el cambio en el campo de archivo oculto
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    console.log("Se subió un archivo");
+                    uploadForm.submit(); // Envía el formulario automáticamente
+                }
+            });
+        });
+    </script>
+{% endblock %}
