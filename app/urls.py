@@ -1,7 +1,7 @@
 from django.urls import path
 from app.views import home, CustomLoginView, signout
 from . import views
-from .views import instrument
+from .views import instrument, orchestral_project
 
 urlpatterns = [
     path('', home, name="home"),
@@ -9,8 +9,8 @@ urlpatterns = [
     path('logout', signout, name='logout'),
 
     # academic core
-   # path('orchestral_projects',          views.orchestral_projects_list, name='project_list'),
-   # path('orchestral_projects/<int:id>', views.orchestral_projects_detail, name='project_detail'),
+    path('orchestral_projects',          orchestral_project.orchestral_projects_list, name='project_list'),
+    path('orchestral_projects/<int:id>', orchestral_project.orchestral_projects_detail, name='project_detail'),
    # path('musical_programs',             views.programs_list, name='programs_list'),
    # path('musical_programs/<int:id>',    views.program_detail, name='program_detail'),
     path('instruments',                  instrument.instruments_list, name='instruments_list'),

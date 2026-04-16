@@ -5,42 +5,6 @@
 
 {% block content %}
 
-    <!--
-    <h1>Registrar Proyecto Orquestal</h1>
-  
-    <form action="{% url 'academic_core:project_list' %}" method="post" >
-    {% csrf_token %}
-
-        <div class="flex flex-col md:flex-row md:items-end md:space-x-4 gap-4">
-            <div class="flex-1 min-w-0"> {# flex-1 permite que el item crezca, min-w-0 para evitar desbordamiento #}
-                <label for="{{ form.program.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa</label>
-                {{ form.program }}
-            </div>
-
-            <div class="flex-1 min-w-0">
-                <label for="{{ form.name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del proyecto</label>
-                {{ form.name }}
-            </div>
-
-            {# Botón #}
-            <div class="self-end md:self-auto"> {# self-end para alinear el botón con la base de los inputs en móviles, md:self-auto para deshabilitarlo en md #}
-                <button type="submit" class="w-full md:w-auto text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Registrar nuevo proyecto</button>
-            </div>
-
-            {% if form.errors %} 
-                {% for field, errors in form.errors.items %}
-                    {% for error in errors %}
-                        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
-                    {% endfor %}
-                {% endfor %}
-            {% endif %}
-
-        </div>
-    </form>
-
-    <br>
-    -->
-
     <h1>Listado de Niveles</h1>
     {# Tabla de Niveles #}
     {# Clases modificadas: bg-white/80 para la tabla #}
@@ -69,7 +33,6 @@
                 {% endfor %}
             </tbody>
         </table>
-         {% include "paginate.html" %}
     </div>
 
 {% endblock %}
