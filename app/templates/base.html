@@ -9,7 +9,7 @@
     {% tailwind_css %} 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'styles/base.css' %}">
    
@@ -31,12 +31,6 @@
                             Home
                         </a>
                     </li>
-                   <li class="mb-4">
-                        {% comment %} <a href="{% url 'students:new' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
-                            <i class="fas fa-file-medical mr-3"></i>
-                            Nueva inscripción
-                        {% comment %} </a> {% endcomment %}
-                    </li>
                     <li class="mb-4">
                         {% comment %} <a href="{% url 'students:list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
                             <i class="fas fa-users mr-3"></i>
@@ -44,10 +38,10 @@
                         {% comment %} </a> {% endcomment %}
                     </li>
                     <li class="mb-4">
-                        {% comment %} <a href="{% url 'academic_core:instruments_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
+                        <a href="{% url 'app:instruments_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200">
                             <i class="fas fa-project-diagram mr-3"></i>
                             Cátedras
-                        {% comment %} </a> {% endcomment %}
+                        </a>
                     </li>
                     <li class="mb-4">
                         {% comment %} <a href="{% url 'academic_core:project_list' %}" class="flex items-center text-gray-700 hover:text-pink-600 font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition duration-200"> {% endcomment %}
