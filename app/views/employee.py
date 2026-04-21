@@ -1,13 +1,12 @@
+from django.contrib.staticfiles import finders
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import FileResponse, Http404
-from django.contrib.staticfiles.finders import find
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from ..models import Employee
 from ..utils.calculate_age import calculate_age
 from ..utils.import_employees import import_employee_from_xlsx
-import os
 
 # Create your views here.
 @login_required
@@ -39,20 +38,18 @@ def employee_detail(request, id):
 
 @login_required
 def download_employees_template(request):
-    file_path = find(os.path.join('employees', 'templates', 'template_employees.xlsx'))
+    file_path = finders.find('templates/template_employees.xlsx')
     
     if not file_path:
-        raise Http404("Template de empleados no encontrado.")
-    
-    # Abre el archivo en modo binario
-    file_to_download = open(file_path, 'rb')
-    
-    # Crea una respuesta de archivo, forzando la descarga con Content-Disposition
-    response = FileResponse(file_to_download)
-    response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    response['Content-Disposition'] = 'attachment; filename="template_employees.xlsx"'
-    
-    return response
+        raise Http404("Plantilla de empleados no encontrada.")
+        
+    # FileResponse maneja automáticamente el cierre del archivo 
+    # y los headers si usamos as_attachment=True
+    return FileResponse(
+        open(file_path, 'rb'), 
+        as_attachment=True, 
+        filename='template_employees.xlsx'
+    )
 
 @login_required
 @require_POST
@@ -60,7 +57,7 @@ def upload_employees_data(request):
     file = request.FILES.get("file")
     if not file:
         messages.error(request, "Debes seleccionar un archivo de excel")
-        return redirect("employees:list")
+        return redirect("app:employee_list")
 
     try:
         # Llamamos a la lógica central de importación y obtenemos el resultado completo
@@ -90,4 +87,4 @@ def upload_employees_data(request):
         # Error a nivel de archivo
         messages.error(request, f"Error al importar el archivo: {e}")
 
-    return redirect("employees:list")
+    return redirect("app:employee_list")

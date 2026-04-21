@@ -1,19 +1,14 @@
 from django.contrib import messages
+from django.contrib.staticfiles import finders
 from django.http import FileResponse, Http404
-from django.contrib.staticfiles.finders import find
-from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from django.db.models import F
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from ..models import Student, EmergencyContact, StudentRelative, DetailAcademicInscription, OrchestralProject, Instrument, AcademicPeriod
 from ..utils.calculate_age import calculate_age
-from ..utils.import_students import import_students_from_xlsx
-import os
-
-  
+from ..utils.import_students import import_students_from_xlsx  
 
 @login_required
 def student_list(request):
@@ -79,10 +74,10 @@ def student_detail(request, id):
 
 @login_required
 def download_students_template(request):
-    file_path = find(os.path.join('students', 'templates', 'template_students.xlsx'))
+    file_path = finders.find('templates/template_students.xlsx')
     
     if not file_path:
-        raise Http404("Template de estudiantes no encontrado.")
+        raise Http404("Plantilla de estudiantes no encontrada.")
     
     # Abre el archivo en modo binario
     file_to_download = open(file_path, 'rb')
@@ -100,7 +95,7 @@ def upload_students_data(request):
     file = request.FILES.get("file")
     if not file:
         messages.error(request, "Debes seleccionar un archivo de excel")
-        return redirect("students:list")
+        return redirect("app:student_list")
 
     try:
         # Llamamos a la lógica central de importación y obtenemos el resultado completo
@@ -131,4 +126,4 @@ def upload_students_data(request):
         # Error a nivel de archivo
         messages.error(request, f"Error al importar el archivo: {e}")
 
-    return redirect("students:list")
+    return redirect("app:student_list")
